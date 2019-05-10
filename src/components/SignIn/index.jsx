@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-
+import { PasswordForgetLink } from '../PasswordForget';
 import { SignUpLink } from '../SignUp';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/Routes';
@@ -10,6 +10,7 @@ const SignIn = () => (
   <div>
     <h1>Sign In to your account</h1>
     <SignInForm />
+    <PasswordForgetLink />
     <SignUpLink />
   </div>
 );
@@ -60,6 +61,7 @@ class SignInFormBase extends Component {
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
+          autoComplete="Email"
         />
         <label>Password</label>
         <input
@@ -68,6 +70,7 @@ class SignInFormBase extends Component {
           onChange={this.onChange}
           type="password"
           placeholder="Password"
+          autoComplete="Password"
         />
         <button disabled={isInvalid} type="submit">
           Sign In

@@ -2,6 +2,7 @@ import React from 'react';
 import { AuthUserContext } from '../Session';
 import { SignInForm } from '../SignIn';
 import { SignUpLink } from '../SignUp';
+import { PasswordForgetLink } from '../PasswordForget';
 
 const Home = () => (
   <div className="main">
@@ -34,6 +35,7 @@ const HomeNonAuth = () => (
     <div>
       <h1>Sign In to your account</h1>
       <SignInForm />
+      <PasswordForgetLink />
       <SignUpLink />
     </div>
   </div>

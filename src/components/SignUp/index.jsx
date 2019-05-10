@@ -146,6 +146,7 @@ class SignUpFormBase extends Component {
                     onChange={this.onChange}
                     type="password"
                     placeholder="Password*"
+                    autoComplete="New Password"
                 />
                 <label>Please confirm your password</label>
                 <input
@@ -154,6 +155,7 @@ class SignUpFormBase extends Component {
                     onChange={this.onChange}
                     type="password"
                     placeholder="Confirm Password*"
+                    autoComplete="Confirm Password"
                 />
                 <button disabled={isInvalid} type="submit">Sign Up</button>
                 {error && <p>{error.message}</p>}
