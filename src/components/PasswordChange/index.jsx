@@ -56,7 +56,7 @@ class PasswordChangeForm extends Component {
           onChange={this.onChange}
           type="password"
           placeholder="Confirm New Password"
-          autocomplete="off"
+          autoComplete="off"
           autofill="off"
         />
         <button disabled={isInvalid} type="submit">
