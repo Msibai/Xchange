@@ -1,0 +1,34 @@
+.navigation a {
+    padding: 8px;
+    text-decoration: none;
+    color: #f18d13;
+    margin: 5px;
+    font-weight: 700;
+}
+  
+.navigation a:hover, .navigation a:focus {
+    color: whitesmoke;
+    background-color: #f18d13;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    padding: 0;
+}
+button {
+    background-color: #f18d13;
+    color: whitesmoke;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .navigation a {
+        padding: 4px;
+        margin: 2px;
+        font-weight: 400;
+    }
+
+  }

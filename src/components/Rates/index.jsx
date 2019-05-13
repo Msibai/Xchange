@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './style.css';
 
 const CURRENCY_NAMES = {
     'SEK':'Swedish krona',

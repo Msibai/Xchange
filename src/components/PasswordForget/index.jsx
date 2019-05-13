@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import './style.css';
 import { Link } from 'react-router-dom';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/Routes';
 
 const PasswordForgetPage = () => (
-  <div>
+  <div className="passwordForgetPage">
     <h1>Forgot Password</h1>
     <PasswordForgetForm />
   </div>
@@ -48,8 +49,8 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <p>Please enter your email address and we will send you instructions on how to reset your password</p>
+      <form className="passwordForget"onSubmit={this.onSubmit}>
+        <p>If you forget your password please enter your email address and we will send you link to reset your password</p>
         <input
           name="email"
           value={this.state.email}
@@ -58,7 +59,7 @@ class PasswordForgetFormBase extends Component {
           placeholder="Email Address"
         />
         <button disabled={isInvalid} type="submit">
-          Reset My Password
+          Send
         </button>
 
         {error && <p>{error.message}</p>}

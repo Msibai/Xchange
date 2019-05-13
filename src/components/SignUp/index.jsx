@@ -3,11 +3,12 @@ import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/Routes';
+import './style.css'
 
 
 
 const SignUp = () => (
-    <div>
+    <div className="signUpPage">
         <h1>Create an Account</h1>
         <SignUpForm />
     </div>
@@ -120,7 +121,7 @@ class SignUpFormBase extends Component {
             baseCurrency === '';
         
         return (
-            <form onSubmit={this.onSubmit}>
+            <form className="signUp" onSubmit={this.onSubmit}>
                 <label>First Name</label>
                 <input
                     name="firstName"

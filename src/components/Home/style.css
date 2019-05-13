@@ -1,0 +1,30 @@
+.main {
+    margin: 0;
+    background-image: url("../../image/background.jpg");
+    flex-grow: 1;
+    background-size: 100% 100%;
+}
+
+.intro {
+    font-size: 1.5rem;
+    background: rgba(191, 215, 234, 0.5);
+    padding: 1rem;
+    margin: 2rem 10rem;
+}
+
+.intro p {
+    color: #001933;
+    font-family: 'Georgia';
+}
+
+.intro h1 {
+    color: #f18d13;
+    font-family: 'Georgia';
+}
+
+@media only screen and (max-width: 600px) {
+    .intro {
+        margin: 1rem;
+    }
+  
+}

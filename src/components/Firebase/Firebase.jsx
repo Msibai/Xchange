@@ -36,6 +36,25 @@ class Firebase {
 
   users = () => this.db.ref('users');
 
-  }
+  getUserName = () => this.auth.onAuthStateChanged((user) => {
+    if (user) {
+      this.db.ref('/users/' + user.uid).once('value').then(function(snapshot) {
+        var firstName = (snapshot.val() && snapshot.val().firstName) || 'Anonymous';
+        var lastName = (snapshot.val() && snapshot.val().lastName) || 'Anonymous';
+        console.log(firstName, lastName)
+      });
+    } 
+  });
+
+  getUserBase = () => this.auth.onAuthStateChanged((user) => {
+    if (user) {
+      this.db.ref('/users/' + user.uid).once('value').then(function(snapshot) {
+        var defaultBase = (snapshot.val() && snapshot.val().baseCurrency) || 'Anonymous';
+        console.log(defaultBase)
+      });
+    } 
+  });
+
+}
 
 export default Firebase;

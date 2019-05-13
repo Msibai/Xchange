@@ -5,9 +5,10 @@ import { PasswordForgetLink } from '../PasswordForget';
 import { SignUpLink } from '../SignUp';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/Routes';
+import './style.css'
 
 const SignIn = () => (
-  <div>
+  <div className="signInPage">
     <h1>Sign In to your account</h1>
     <SignInForm />
     <PasswordForgetLink />
@@ -53,7 +54,7 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form className="signIn" onSubmit={this.onSubmit}>
         <label>Email Address</label>
         <input
           name="email"

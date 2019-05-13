@@ -1,0 +1,57 @@
+.tableContainer {
+    margin: 2rem 5rem;
+}
+
+.tableContainer p {
+    font-weight: 900;
+    text-align: left;
+    padding-left: 5rem;
+}
+
+.ratesTable  {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.ratesTable  td, .ratesTable  th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.ratesTable tr:nth-child(even){background-color: #f2f2f2;}
+
+.ratesTable  tr:hover {background-color: #ddd;}
+
+.ratesTable  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #f18d13;
+    color: white;
+    font-weight: 900;
+}
+.ratesTable  .date {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 3rem;
+    text-align: left;
+    background-color: #3E78B2;
+    color: white;
+    font-weight: 900;
+}
+
+.flag {
+    border: .5px solid #A9ACA9;
+    border-radius: 50%;
+    width:3rem;
+    height: 3rem;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .tableContainer {
+      margin: 1rem;
+    }
+  
+  }
