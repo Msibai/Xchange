@@ -22,6 +22,11 @@
     font-family: 'Georgia';
 }
 
+h2 {
+    color: #001933;
+    text-shadow: 1px 1px 2px #f18d13;  
+}
+
 @media only screen and (max-width: 600px) {
     .intro {
         margin: 1rem;
