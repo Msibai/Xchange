@@ -3,7 +3,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './style.css'
 
-
 const CURRENCY_NAMES = {
     'SEK':'Swedish krona',
     'USD': 'US dollar',
@@ -49,7 +48,7 @@ class Statics extends Component {
             base: '',
             rates: {},
             from: '',
-            till: '',
+            till: new Date().toISOString().split("T")[0],
             startDate: new Date(),
             endDate: new Date(),
          };
