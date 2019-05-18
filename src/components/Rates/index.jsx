@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
+import { withAuthorization } from '../Session';
 
 const CURRENCY_NAMES = {
     'SEK':'Swedish krona',
@@ -24,7 +25,6 @@ const CURRENCY_NAMES = {
     'CNY': 'Chinese yuan renminbi',
     'HKD': 'Hong Kong dollar',
     'IDR': 'Indonesian rupiah',
-    'ILS': 'Shekel',
     'INR': 'Indian rupee',
     'KRW': 'South Korean won',
     'MXN': 'Mexican peso',
@@ -46,32 +46,48 @@ class Rates extends Component {
                 date: '',
                 base: '',
                 rate: [],
+                userBase: '',
         }
         this.changeBase = this.changeBase.bind(this);
         this.renderCodes = this.renderCodes.bind(this);
         this.renderRates = this.renderRates.bind(this);
-    }
-   
-// Using Euro as base curency when the page is loaded
-    componentDidMount() {
-        const url = `https://api.exchangeratesapi.io/latest?base=EUR`;
-        fetch(url)
-            .then((response) => { return response.json()})
-            .then((data) => {this.setState({
-                                rate: Object.entries(data.rates),
-                                date: data.date })})                           
-            .catch((error) => console.log(error));
+        this.getUserBase = this.getUserBase.bind(this);
     }
 
-// Using template strings to update the state for base currency   
-    componentDidUpdate() {
-        const url = `https://api.exchangeratesapi.io/latest?base=${this.state.base}`;
+    getUserBase = () => this.props.firebase.auth.onAuthStateChanged((user) => {
+        var defaultBase;
+        var self = this;
+        if (user) {
+          this.props.firebase.db.ref('/users/' + user.uid).once('value').then(function(snapshot) {
+            defaultBase = (snapshot.val() && snapshot.val().baseCurrency) || 'Anonymous';
+            self.setState({userBase: defaultBase});
+          });
+        }
+    });
+   
+
+    componentDidMount() {
+      this.getUserBase();
+    }
+
+    componentDidUpdate() { 
+        if (this.state.base) {
+            const url = `https://api.exchangeratesapi.io/latest?base=${this.state.base}`;
+            fetch(url, { signal: this.abortController.signal })
+                .then((response) => { return response.json()})
+                .then((data) => {this.setState({
+                                    rate: Object.entries(data.rates),
+                                    date: data.date })})                           
+                .catch((error) => console.log(error));
+        } else {
+            const url = `https://api.exchangeratesapi.io/latest?base=${this.state.userBase}`;
         fetch(url, { signal: this.abortController.signal })
             .then((response) => { return response.json()})
             .then((data) => {this.setState({
                                 rate: Object.entries(data.rates),
                                 date: data.date })})                           
             .catch((error) => console.log(error));
+        }
     }
 
     abortController = new window.AbortController();
@@ -113,21 +129,20 @@ class Rates extends Component {
 
     renderCodes() {
         return(
-            Object.entries(CURRENCY_NAMES).filter(item => item[0] !== 'EUR') // Exclude Euro because its already there
-                .map((item, i) => (<option value={item[0]} key={i}>{item[1]}</option>))    
+            Object.entries(CURRENCY_NAMES).map((item, i) => (<option value={item[0]} key={i}>{item[1]}</option>))    
         );
     }
 
     render() {
         return (
-            <div>
+            <div style={{margin: "1rem"}}>
                 <div>
                     <h1>CURRENCY RATES</h1>
                     <p>Here you can find foreign exchange rates for different currencies. All rates are obtained from <b>European Central Bank.</b></p>
-                    <p>Please note that rates are quoted against the Euro by default, but you can change it by choesing another base currency</p>
+                    <p>Please note that rates are quoted against the base currency that you chose when you create your account, but you can change it by choesing another base currency</p>
                     <label style={{margin: "1rem"}}><b>Base Currency</b></label>
                     <select onChange={this.changeBase}>
-                        <option value="EUR">Euro</option>
+                        <option value="">{this.state.userBase}</option>
                         {this.renderCodes()}              
                     </select>
                 </div>                  
@@ -136,5 +151,6 @@ class Rates extends Component {
         );
     }
 }
- 
-export default Rates;
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(Rates);
