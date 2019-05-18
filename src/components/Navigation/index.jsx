@@ -44,6 +44,9 @@ const NavigationNonAuth = () => (
         <Link to={ROUTES.HOME}>Home</Link>
       </li>
       <li>
+        <Link to={ROUTES.STATICS}>Statics</Link>
+      </li>
+      <li>
         <Link to={ROUTES.SIGN_IN}>Sign In</Link>
       </li>
     </ul>
